@@ -47,3 +47,28 @@ spec:
     - path:
         type: PathPrefix
         value: /
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  labels:
+    app: migration-podinfo
+    argocd.argoproj.io/instance: httproutes
+    holos.run/component.name: httproutes
+  name: migration-podinfo
+  namespace: istio-ingress
+spec:
+  hostnames:
+  - migration-podinfo.holos.localhost
+  parentRefs:
+  - name: default
+    namespace: istio-ingress
+  rules:
+  - backendRefs:
+    - name: podinfo
+      namespace: migration
+      port: 9898
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
