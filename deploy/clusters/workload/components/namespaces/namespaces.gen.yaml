@@ -69,3 +69,12 @@ metadata:
     holos.run/component.name: namespaces
     kubernetes.io/metadata.name: istio-system
   name: istio-system
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    argocd.argoproj.io/instance: namespaces
+    holos.run/component.name: namespaces
+    kubernetes.io/metadata.name: migration
+  name: migration
